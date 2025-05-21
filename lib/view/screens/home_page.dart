@@ -138,6 +138,7 @@ class HomePage extends StatelessWidget {
                         splashFactory: NoSplash.splashFactory,
                         highlightColor: Colors.transparent,
                         onTap: () {
+                  
                           if (_homePageController.icons2.length > 10) {
                           } else {
                             _homePageController.chooseCard(2);

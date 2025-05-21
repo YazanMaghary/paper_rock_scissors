@@ -18,6 +18,7 @@ class HomePageController extends GetxController {
   int _counterLose = 0;
   bool _isPlay = false;
   double _turns = 0;
+  bool _dialogShown = false;
 
   // Getters
   List get rand => _rand;
@@ -67,12 +68,12 @@ class HomePageController extends GetxController {
         turns = 0;
       });
     }
-
     update();
   }
 
   Icon? _random() {
-    if (_icons2.length >= 10) {
+    if (_icons2.length >= 10 && !_dialogShown) {
+      _dialogShown = true;
       boxHistory.add({
         "Result":
             _counterWin >= _counterLose
@@ -102,6 +103,7 @@ class HomePageController extends GetxController {
           _icons2.clear();
           _counterLose = 0;
           _counterWin = 0;
+          _dialogShown = false;
         },
       ).show();
     } else {

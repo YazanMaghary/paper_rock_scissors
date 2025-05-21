@@ -6,9 +6,14 @@ import 'package:intl/intl.dart';
 import 'package:paper_rock_scissors_game/core/utils/appConstances.dart';
 import 'package:paper_rock_scissors_game/core/utils/appStrings.dart';
 
+import '../../controller/history_page_controller.dart';
+
 class HistoryPage extends GetView {
   HistoryPage({super.key});
-  final Appstrings appString = Appstrings();
+  final Appstrings _appString = Appstrings();
+  final HistoryPageController _historyController = Get.put(
+    HistoryPageController(),
+  );
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -17,10 +22,15 @@ class HistoryPage extends GetView {
           centerTitle: true,
 
           title: Text(
-            appString.history.tr,
+            _appString.history.tr,
             style: Theme.of(context).primaryTextTheme.titleMedium,
           ),
           backgroundColor: Theme.of(context).primaryColor,
+          actions: [
+        IconButton(onPressed: () {
+                _historyController.clearHistory();
+                }, icon: const Icon(Icons.clear))
+          ],
         ),
         body: Container(
           padding: const EdgeInsets.all(12),
@@ -47,63 +57,69 @@ class HistoryPage extends GetView {
 
                   children: [
                     Text(
-                      appString.result.tr,
+                      _appString.result.tr,
                       style: Theme.of(context).primaryTextTheme.bodyMedium,
                     ),
                     Text(
-                      appString.result.tr,
+                      _appString.result.tr,
                       style: Theme.of(context).primaryTextTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      appString.date.tr,
+                      _appString.date.tr,
                       style: Theme.of(context).primaryTextTheme.bodyMedium,
                     ),
                   ],
                 ),
                 mediumSpace,
-                Expanded(
-                  child: ListView.separated(
-                    itemCount: boxHistory.values.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "${boxHistory.getAt(index)["Result"]}",
-                              style:
-                                  Theme.of(context).primaryTextTheme.bodySmall,
+                GetBuilder<HistoryPageController>(init: _historyController,
+                  builder: (controller) {
+                    return Expanded(
+                      child: ListView.separated(
+                        itemCount: boxHistory.values.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${boxHistory.getAt(index)["Result"]}",
+                                  style:
+                                      Theme.of(context).primaryTextTheme.bodySmall,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 36.w),
+                                  child: Text(
+                                    boxHistory.getAt(index)["Points"],
+                                    style:
+                                        Theme.of(
+                                          context,
+                                        ).primaryTextTheme.bodySmall,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 100.w,
+                                  child: Text(
+                                    "${DateFormat().add_jm().format(DateTime.parse(boxHistory.getAt(index)["Date"]))}\t${DateFormat().add_yMMMMEEEEd().format(DateTime.parse(boxHistory.getAt(index)["Date"]))}",
+                                    style:
+                                        Theme.of(
+                                          context,
+                                        ).primaryTextTheme.bodySmall,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Padding(
-                              padding:  EdgeInsets.only(left: 36.w),
-                              child: Text(
-                                boxHistory.getAt(index)["Points"],
-                                style:
-                                    Theme.of(context).primaryTextTheme.bodySmall,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 100.w,
-                              child: Text(
-                                "${DateFormat().add_jm().format(DateTime.parse(boxHistory.getAt(index)["Date"]))}\t${DateFormat().add_yMMMMEEEEd().format(DateTime.parse(boxHistory.getAt(index)["Date"]))}",
-                                style:
-                                    Theme.of(
-                                      context,
-                                    ).primaryTextTheme.bodySmall,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const Divider(color: Colors.white, thickness: 1);
-                    },
-                  ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const Divider(color: Colors.white, thickness: 1);
+                        },
+                      ),
+                    );
+                  }
                 ),
               ],
             ),

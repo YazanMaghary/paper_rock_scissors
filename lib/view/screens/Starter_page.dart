@@ -16,7 +16,7 @@ class StarterPage extends GetView {
         return SafeArea(
           child: Scaffold(
             body: Container(
-              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
+              padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 32.h),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
@@ -133,29 +133,6 @@ class StarterPage extends GetView {
                             ),
                             child: Text(
                               appStrings.history.tr,
-                              style:
-                                  Theme.of(context).primaryTextTheme.bodySmall,
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            print("text");
-                          },
-                          child: Container(
-                            width: 270.w,
-                            height: 100.h,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
-                              borderRadius: BorderRadius.circular(30.r),
-                            ),
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.symmetric(
-                              vertical: 20.h,
-                              horizontal: 32.w,
-                            ),
-                            child: Text(
-                              appStrings.settings.tr,
                               style:
                                   Theme.of(context).primaryTextTheme.bodySmall,
                             ),

@@ -1,3 +1,10 @@
 import 'package:get/get.dart';
 
-class HistoryPageController extends GetxController {}
+import '../core/utils/appConstances.dart';
+
+class HistoryPageController extends GetxController {
+  clearHistory() {
+    boxHistory.clear();
+    update();
+  }
+}
