@@ -4,9 +4,10 @@
 ### Screenshots:
 
 <div style="display: flex; overflow-x: auto; gap: 10px;">
-  <img src="./images/screenshot1.png" width="300" />
-  <img src="./images/screenshot2.png" width="300" />
-  <img src="./images/screenshot3.png" width="300" />
+  <img src="./previewforGitHub/Screenshot_20250529-141316.png" width="300" />
+  <img src="./previewforGitHub/Screenshot_20250529-141321.png" width="300" />
+  <img src="./previewforGitHub/Screenshot_20250529-141325.png" width="300" />
+  <img src="./previewforGitHub/Screenshot_20250529-141331.png" width="300" />
 </div>
 
 A new Flutter project.
